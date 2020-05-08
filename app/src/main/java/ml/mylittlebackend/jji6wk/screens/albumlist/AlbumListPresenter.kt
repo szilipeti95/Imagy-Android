@@ -1,4 +1,6 @@
 package ml.mylittlebackend.jji6wk.screens.albumlist
 
-class AlbumListPresenter {
+import javax.inject.Inject
+
+class AlbumListPresenter @Inject constructor() {
 }
