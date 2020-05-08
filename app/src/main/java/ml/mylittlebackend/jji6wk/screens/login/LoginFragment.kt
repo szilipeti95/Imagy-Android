@@ -15,6 +15,6 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
     }
 
     override fun render(viewState: LoginViewState) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        
     }
 }

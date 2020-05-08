@@ -1,8 +1,9 @@
 package ml.mylittlebackend.jji6wk.domain.interactor
 
 import ml.mylittlebackend.jji6wk.domain.model.Album
+import javax.inject.Inject
 
-class AlbumInteractor {
+class AlbumInteractor @Inject constructor() {
     fun getAllAlbum(): List<Album> {
         return listOf()
     }

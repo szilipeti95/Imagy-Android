@@ -1,6 +1,8 @@
 package ml.mylittlebackend.jji6wk.domain.interactor
 
-class AuthInteractor {
+import javax.inject.Inject
+
+class AuthInteractor @Inject constructor() {
     fun login() {
 
     }
