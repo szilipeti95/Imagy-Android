@@ -1,4 +1,5 @@
 package ml.mylittlebackend.jji6wk.screens.login
 
-class LoginPresenter {
-}
+import javax.inject.Inject
+
+class LoginPresenter @Inject constructor()

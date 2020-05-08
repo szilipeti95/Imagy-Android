@@ -1,33 +1,21 @@
 package ml.mylittlebackend.jji6wk.screens.albumdetail
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import co.zsmb.rainbowcake.base.RainbowCakeFragment
+import co.zsmb.rainbowcake.dagger.getViewModelFromFactory
 
 import ml.mylittlebackend.jji6wk.R
 
-class AlbumDetailFragment : Fragment() {
+class AlbumDetailFragment : RainbowCakeFragment<AlbumDetailViewState, AlbumDetailViewModel>() {
+    override fun provideViewModel() = getViewModelFromFactory()
+    override fun getViewResource() = R.layout.album_detail_fragment
 
-    companion object {
-        fun newInstance() = AlbumDetailFragment()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
-    private lateinit var viewModel: AlbumDetailViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.album_detail_fragment, container, false)
+    override fun render(viewState: AlbumDetailViewState) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AlbumDetailViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

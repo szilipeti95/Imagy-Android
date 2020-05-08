@@ -1,7 +1,11 @@
 package ml.mylittlebackend.jji6wk.screens.userdetail
 
-import androidx.lifecycle.ViewModel
+import co.zsmb.rainbowcake.base.JobViewModel
+import javax.inject.Inject
 
-class UserDetailViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class UserDetailViewModel @Inject constructor(
+    private val userDetailPresenter: UserDetailPresenter
+): JobViewModel<UserDetailViewState>(Loading) {
+
 }
+

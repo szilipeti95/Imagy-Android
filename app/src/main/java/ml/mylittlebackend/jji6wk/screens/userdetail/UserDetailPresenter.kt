@@ -1,4 +1,6 @@
 package ml.mylittlebackend.jji6wk.screens.userdetail
 
-class UserDetailPresenter {
+import javax.inject.Inject
+
+class UserDetailPresenter @Inject constructor() {
 }

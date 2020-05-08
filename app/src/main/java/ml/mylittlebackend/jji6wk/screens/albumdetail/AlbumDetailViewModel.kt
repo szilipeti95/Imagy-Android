@@ -1,7 +1,9 @@
 package ml.mylittlebackend.jji6wk.screens.albumdetail
 
-import androidx.lifecycle.ViewModel
+import co.zsmb.rainbowcake.base.JobViewModel
+import javax.inject.Inject
 
-class AlbumDetailViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class AlbumDetailViewModel @Inject constructor(
+    private val albumDetailPresenter: AlbumDetailPresenter
+): JobViewModel<AlbumDetailViewState>(Loading) {
 }
