@@ -1,13 +1,11 @@
 language: android
-
+dist: trusty
 android:
   components:
     - tools
     - platform-tools
     - tools # appears twice as per Travis docs
     - build-tools-29.0.3
-    - android-4
-    - android-10
     - android-19
     - android-23
     - android-29
@@ -16,13 +14,14 @@ android:
 
 env:
   matrix:
-    - ANDROID_TARGET=android-4 ANDROID_ABI=armeabi
-    - ANDROID_TARGET=android-10 ANDROID_ABI=armeabi
     - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-23 ANDROID_ABI=armeabi-v7a
     - ANDROID_TARGET=android-29 ANDROID_ABI=armeabi-v7a
 
 before_script:
   # Create and start emulator
+  - yes | sdkmanager "platforms;android-29"
+  - yes | sdkmanager "build-tools;29.0.3"
   - android list targets
   - jdk_switcher use oraclejdk8
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
