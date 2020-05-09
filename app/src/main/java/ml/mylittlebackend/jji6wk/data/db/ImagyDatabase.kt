@@ -12,9 +12,6 @@ import ml.mylittlebackend.jji6wk.data.converters.CommonConverters
     entities = [
     ]
 )
-@TypeConverter(
-    CommonConverters::class
-)
 abstract class ImagyDatabase: RoomDatabase() {
     abstract fun albumDao(): AlbumDAO
 }

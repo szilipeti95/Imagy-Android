@@ -27,6 +27,6 @@ class RoomModule {
     @Provides
     @Singleton
     fun provideCityDao(imagyDatabase: ImagyDatabase) =
-        cityBroDatabase.cityDao()
+        imagyDatabase.albumDao()
 
 }
