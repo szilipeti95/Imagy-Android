@@ -1,0 +1,320 @@
+openapi: 3.0.0
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/szilipeti95/ImagyApi/1.0.0
+info:
+  description: API for Imagy App
+  version: "1.0.1"
+  title: Imagy API
+tags:
+  - name: authorized
+    description: Logged in user api calls
+  - name: unauthorized
+    description: Guest user api calls
+paths:
+  /login:
+    post:
+      tags:
+        - unathorized
+      summary: user login
+      requestBody:
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/AuthRequest'
+      responses:
+        '200':
+          description: login result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        '401':
+          description: username or password error
+  /register:
+    post:
+      tags:
+        - unathorized
+      summary: user register
+      requestBody:
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/AuthRequest'
+      responses:
+        '200':
+          description: register result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        '401':
+          description: username is already taken
+  /gallery:
+    get:
+      tags: 
+        - unauthorized
+      summary: returns the galleries
+      parameters: 
+        - in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: search result
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Gallery'
+    post:
+      tags:
+        - authorized
+      summary: adds new gallery
+      requestBody:
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/NewGallery'
+      responses:
+        '200':
+          description: register result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+    delete:
+      tags:
+        - authorized
+      summary: deletes gallery
+      parameters: 
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: delete result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+                
+  /gallery/self:  
+    get:
+      tags: 
+        - authorized
+      summary: returns the galleries of the requestor
+      responses:
+        '200':
+          description: search result
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Gallery'
+  /gallery/images:
+    get:
+      tags: 
+        - unauthorized
+      summary: returns the images in a gallery
+      parameters: 
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: image uris in the gallery
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Image'
+  /gallery/like/{albumId}:
+    get:
+      tags: 
+        - authorized
+      summary: likes gallery
+      parameters: 
+        - in: path
+          name: albumId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: image uris in the gallery
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequestResponse'
+  /gallery/unlike/{albumId}:
+    get:
+      tags: 
+        - authorized
+      summary: unlikes gallery
+      parameters: 
+        - in: path
+          name: albumId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: image uris in the gallery
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequestResponse'
+  /user/self:
+    get:
+      tags: 
+        - authorized
+      summary: returns the authenticated user
+      responses:
+        '200':
+          description: user result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /image/{image-uri}:
+    get:
+      tags: 
+        - unauthorized
+      summary: returns the image
+      parameters: 
+        - in: path
+          name: image-uri
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: search result
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+  /image:
+    post:
+      tags:
+        - authorized
+      summary: adds new image to gallery
+      requestBody:
+        content:
+          image/png:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: register result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+components:
+  schemas:
+    AuthRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          example: test
+        password:
+          type: string
+          example: password
+    User:
+      type: object
+      required: 
+        - username
+        - galleryCount
+        - profileImageUri
+      properties:
+        username:
+          type: string
+          example: 'username'
+        galleryCount:
+          type: integer
+          example: 10
+        profileImageUri:
+          type: string
+          example: 'image-1'
+    NewGallery:
+      type: object
+      required:
+        - name
+        - tags
+      properties:
+        name:
+          type: string
+          example: 'gallery name'
+        tags:
+          type: array
+          items:
+            type: string
+            example: ['tag1', 'tag2']
+    Gallery:
+      type: object
+      required:
+        - id
+        - name
+        - author
+        - likeCount
+        - tags
+        - creationDate
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: 'gallery name'
+        author:
+          type: string
+          example: 'user1'
+        likeCount:
+          type: integer
+          example: 10
+        tags:
+          type: array
+          items: 
+            type: string
+            example: ['tag1', 'tag2']
+        creationDate:
+          type: integer
+          example: 1573916863
+    Image:
+      type: object
+      required: 
+        - imageUri
+      properties:
+        imageUri:
+          type: string
+          example: 'image-uri'
+    RequestResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: 'Successfully uploaded'
