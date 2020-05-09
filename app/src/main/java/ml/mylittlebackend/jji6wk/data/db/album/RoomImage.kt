@@ -3,6 +3,8 @@ package ml.mylittlebackend.jji6wk.data.db.album
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
+import androidx.room.PrimaryKey
+import java.util.*
 
 @Entity(
     tableName = "image",
@@ -20,7 +22,8 @@ import androidx.room.Index
     ]
 )
 class RoomImage(
-    val id: Int,
+    @PrimaryKey
+    val id: String,
     val albumId: Int,
     val imageUri: String
 )

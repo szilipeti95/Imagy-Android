@@ -6,6 +6,5 @@ data class User(
     val email: String,
     val username: String,
     val password: String,
-    val likedCount: Int,
-    val creationDate: String
+    val likedCount: Int
 )

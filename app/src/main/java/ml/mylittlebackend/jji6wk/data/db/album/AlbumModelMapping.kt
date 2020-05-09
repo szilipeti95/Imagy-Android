@@ -32,7 +32,6 @@ fun Album.toRoomModel(): RoomAlbum {
 
 fun RoomImage.toDomainModel(): Image {
     return Image(
-        id = id,
         imageUri = imageUri,
         albumId = albumId
     )
@@ -40,7 +39,7 @@ fun RoomImage.toDomainModel(): Image {
 
 fun Image.toRoomModel(): RoomImage {
     return RoomImage(
-        id = id,
+        id = UUID.randomUUID().toString(),
         imageUri = imageUri,
         albumId = albumId
     )

@@ -12,6 +12,7 @@ class UserInteractor @Inject constructor(
     fun getUser(): User {
         return User(email = "Dummy Email",
                     username = "Dummy Username",
-                    password = "Dummy Password")
+                    password = "Dummy Password",
+                    likedCount = 0)
     }
 }
