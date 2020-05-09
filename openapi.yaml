@@ -51,12 +51,12 @@ paths:
                 $ref: '#/components/schemas/RequestResponse'
         '401':
           description: username is already taken
-  /gallery:
+  /album:
     get:
-      tags: 
+      tags:
         - unauthorized
-      summary: returns the galleries
-      parameters: 
+      summary: returns the albums
+      parameters:
         - in: query
           name: filter
           required: false
@@ -70,16 +70,16 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Gallery'
+                  $ref: '#/components/schemas/Album'
     post:
       tags:
         - authorized
-      summary: adds new gallery
+      summary: adds new album
       requestBody:
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/NewGallery'
+                $ref: '#/components/schemas/NewAlbum'
       responses:
         '200':
           description: register result
@@ -87,13 +87,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RequestResponse'
+  /album/delete/{albumId}:
     delete:
       tags:
         - authorized
-      summary: deletes gallery
-      parameters: 
-        - in: query
-          name: id
+      summary: deletes album
+      parameters:
+        - in: path
+          name: albumId
           required: true
           schema:
             type: integer
@@ -104,12 +105,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RequestResponse'
-                
-  /gallery/self:  
+
+  /album/self:
     get:
-      tags: 
+      tags:
         - authorized
-      summary: returns the galleries of the requestor
+      summary: returns the albums of the requestor
       responses:
         '200':
           description: search result
@@ -118,33 +119,33 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Gallery'
-  /gallery/images:
+                  $ref: '#/components/schemas/Album'
+  /album/images/{albumId}:
     get:
-      tags: 
+      tags:
         - unauthorized
-      summary: returns the images in a gallery
-      parameters: 
-        - in: query
-          name: id
+      summary: returns the images in a album
+      parameters:
+        - in: path
+          name: albumId
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: image uris in the gallery
+          description: image uris in the album
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Image'
-  /gallery/like/{albumId}:
-    get:
-      tags: 
+  /album/like/{albumId}:
+    post:
+      tags:
         - authorized
-      summary: likes gallery
-      parameters: 
+      summary: likes album
+      parameters:
         - in: path
           name: albumId
           required: true
@@ -152,19 +153,19 @@ paths:
             type: integer
       responses:
         '200':
-          description: image uris in the gallery
+          description: image uris in the album
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/RequestResponse'
-  /gallery/unlike/{albumId}:
-    get:
-      tags: 
+  /album/unlike/{albumId}:
+    post:
+      tags:
         - authorized
-      summary: unlikes gallery
-      parameters: 
+      summary: unlikes album
+      parameters:
         - in: path
           name: albumId
           required: true
@@ -172,7 +173,7 @@ paths:
             type: integer
       responses:
         '200':
-          description: image uris in the gallery
+          description: image uris in the album
           content:
             application/json:
               schema:
@@ -181,7 +182,7 @@ paths:
                   $ref: '#/components/schemas/RequestResponse'
   /user/self:
     get:
-      tags: 
+      tags:
         - authorized
       summary: returns the authenticated user
       responses:
@@ -193,10 +194,10 @@ paths:
                 $ref: '#/components/schemas/User'
   /image/{image-uri}:
     get:
-      tags: 
+      tags:
         - unauthorized
       summary: returns the image
-      parameters: 
+      parameters:
         - in: path
           name: image-uri
           required: true
@@ -214,7 +215,7 @@ paths:
     post:
       tags:
         - authorized
-      summary: adds new image to gallery
+      summary: adds new image to album
       requestBody:
         content:
           image/png:
@@ -244,21 +245,29 @@ components:
           example: password
     User:
       type: object
-      required: 
+      required:
+        - email
         - username
-        - galleryCount
+        - password
+        - likedCount
         - profileImageUri
       properties:
+        email:
+          type: string
+          example: 'email'
         username:
           type: string
           example: 'username'
-        galleryCount:
+        password:
+          type: string
+          example: 'password'
+        likedCount:
           type: integer
           example: 10
         profileImageUri:
           type: string
           example: 'image-1'
-    NewGallery:
+    NewAlbum:
       type: object
       required:
         - name
@@ -266,13 +275,13 @@ components:
       properties:
         name:
           type: string
-          example: 'gallery name'
+          example: 'album name'
         tags:
           type: array
           items:
             type: string
             example: ['tag1', 'tag2']
-    Gallery:
+    Album:
       type: object
       required:
         - id
@@ -287,7 +296,7 @@ components:
           example: 1
         name:
           type: string
-          example: 'gallery name'
+          example: 'album name'
         author:
           type: string
           example: 'user1'
@@ -296,7 +305,7 @@ components:
           example: 10
         tags:
           type: array
-          items: 
+          items:
             type: string
             example: ['tag1', 'tag2']
         creationDate:
@@ -304,7 +313,7 @@ components:
           example: 1573916863
     Image:
       type: object
-      required: 
+      required:
         - imageUri
       properties:
         imageUri:
