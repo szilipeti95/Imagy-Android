@@ -6,29 +6,14 @@ android:
     - platform-tools
     - tools # appears twice as per Travis docs
     - build-tools-29.0.3
-    - android-19
-    - android-23
-    - android-24
+    - android-29
     - extra-android-m2repository
-    - sys-img-armeabi-v7a-android-24
-
-env:
-  matrix:
-    - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
-    - ANDROID_TARGET=android-23 ANDROID_ABI=armeabi-v7a
-    - ANDROID_TARGET=android-24 ANDROID_ABI=armeabi-v7a
 
 before_script:
   # Create and start emulator
   - yes | sdkmanager "platforms;android-29"
   - yes | sdkmanager "build-tools;29.0.3"
-  - android list targets
-  - jdk_switcher use oraclejdk8
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - while [[ `adb shell pm path android` == 'Error'* ]]; do sleep 2; done
-  - adb shell input keyevent 82 &
 
-script: ./gradlew --info connectedAndroidTest
+script: ./gradlew build check
 
 sudo: false
