@@ -1,8 +1,7 @@
-package ml.mylittlebackend.jji6wk.data.album
+package ml.mylittlebackend.jji6wk.data.db.album
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
 @Entity(tableName = "album")
 data class RoomAlbum (

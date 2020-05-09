@@ -1,4 +1,4 @@
-package ml.mylittlebackend.jji6wk.data.album
+package ml.mylittlebackend.jji6wk.data.db.album
 
 import android.annotation.SuppressLint
 import ml.mylittlebackend.jji6wk.domain.model.Album

@@ -1,8 +1,8 @@
 package ml.mylittlebackend.jji6wk.data.db
 
-import ml.mylittlebackend.jji6wk.data.album.AlbumDAO
-import ml.mylittlebackend.jji6wk.data.album.toDomainModel
-import ml.mylittlebackend.jji6wk.data.album.toRoomModel
+import ml.mylittlebackend.jji6wk.data.db.album.AlbumDAO
+import ml.mylittlebackend.jji6wk.data.db.album.toDomainModel
+import ml.mylittlebackend.jji6wk.data.db.album.toRoomModel
 import ml.mylittlebackend.jji6wk.domain.model.Album
 import ml.mylittlebackend.jji6wk.domain.model.Image
 import javax.inject.Inject

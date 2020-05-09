@@ -1,4 +1,4 @@
-package ml.mylittlebackend.jji6wk.data.converters
+package ml.mylittlebackend.jji6wk.data.db.converters
 
 import androidx.room.TypeConverter
 import java.util.*
