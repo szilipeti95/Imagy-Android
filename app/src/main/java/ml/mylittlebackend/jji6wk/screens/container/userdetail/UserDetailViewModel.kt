@@ -1,4 +1,4 @@
-package ml.mylittlebackend.jji6wk.screens.userdetail
+package ml.mylittlebackend.jji6wk.screens.container.userdetail
 
 import co.zsmb.rainbowcake.base.JobViewModel
 import javax.inject.Inject
