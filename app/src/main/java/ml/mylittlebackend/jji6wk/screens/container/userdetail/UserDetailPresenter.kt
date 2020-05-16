@@ -1,4 +1,4 @@
-package ml.mylittlebackend.jji6wk.screens.userdetail
+package ml.mylittlebackend.jji6wk.screens.container.userdetail
 
 import javax.inject.Inject
 

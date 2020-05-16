@@ -1,4 +1,4 @@
-package ml.mylittlebackend.jji6wk.screens.albumlist
+package ml.mylittlebackend.jji6wk.screens.container.albumlist
 
 import ml.mylittlebackend.jji6wk.domain.model.Album
 

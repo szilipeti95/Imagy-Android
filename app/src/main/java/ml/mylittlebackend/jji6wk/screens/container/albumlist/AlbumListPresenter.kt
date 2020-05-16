@@ -1,4 +1,4 @@
-package ml.mylittlebackend.jji6wk.screens.albumlist
+package ml.mylittlebackend.jji6wk.screens.container.albumlist
 
 import javax.inject.Inject
 
