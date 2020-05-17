@@ -3,10 +3,12 @@ package ml.mylittlebackend.jji6wk.screens.container
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.album_detail_fragment.view.*
+import kotlinx.android.synthetic.main.album_detail_fragment.view.albumNameText
+import kotlinx.android.synthetic.main.row_album.view.*
 import ml.mylittlebackend.jji6wk.R
 import ml.mylittlebackend.jji6wk.domain.model.Album
 
@@ -21,13 +23,16 @@ class AlbumAdapter : ListAdapter<Album, AlbumAdapter.AlbumViewHolder>(AlbumCompa
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         val album = getItem(position)
         holder.album = album
-
         holder.albumNameText.text = album.name
+        album.thumbnailUri?.let {
+            //holder.albumImageView.load(it)
+        }
     }
 
 
     inner class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val albumNameText: TextView = itemView.albumNameText
+        val albumImageView: ImageView = itemView.albumImageView
         var album: Album? = null
 
         init {

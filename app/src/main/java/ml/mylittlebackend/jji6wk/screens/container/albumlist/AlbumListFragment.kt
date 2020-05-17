@@ -24,30 +24,22 @@ class AlbumListFragment : RainbowCakeFragment<AlbumListViewState, AlbumListViewM
         albumAdapter.listener = this
     }
 
-    override fun render(viewState: AlbumListViewState) {
-    }
-
     override fun onStart() {
         super.onStart()
 
-        val albumList: List<Album> = listOf(
-            Album(
-                id = 1,
-                name = "Dummy Album 1",
-                author = "Dummy User 1",
-                likeCount = 0,
-                tags = listOf(),
-                creationDate = "Yesterday"
-            ),
-            Album(
-                id = 2,
-                name = "Dummy Album 2",
-                author = "Dummy User 2",
-                likeCount = 0,
-                tags = listOf(),
-                creationDate = "Yesterday"
-            )
-        )
+        viewModel.load()
+
+    }
+
+    override fun render(viewState: AlbumListViewState) {
+        when (viewState) {
+            is AlbumListLoaded -> {
+                showAlbumList(viewState.data)
+            }
+        }
+    }
+
+    private fun showAlbumList(albumList: List<Album>) {
         albumAdapter.submitList(albumList)
         albumListRecyclerView.adapter = albumAdapter
     }

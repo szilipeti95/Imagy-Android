@@ -9,8 +9,8 @@ class AlbumInteractor @Inject constructor(
     private val diskDataSource: DiskDataSource,
     private val networkDataSource: NetworkDataSource
 ) {
-    fun getAllAlbum(): List<Album> {
-        return listOf()
+    suspend fun getAllAlbum(): List<Album>? {
+        return networkDataSource.getAlbums()
     }
 
     fun addAlbum(album: Album) {

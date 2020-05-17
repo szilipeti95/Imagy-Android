@@ -33,25 +33,7 @@ class UserDetailFragment : RainbowCakeFragment<UserDetailViewState, UserDetailVi
     override fun onStart() {
         super.onStart()
 
-        val albumList: List<Album> = listOf(
-            Album(
-                id = 1,
-                name = "Own Album 1",
-                author = "Own User 1",
-                likeCount = 0,
-                tags = listOf(),
-                creationDate = "Yesterday"
-            ),
-            Album(
-                id = 2,
-                name = "Own Album 2",
-                author = "Own User 1",
-                likeCount = 0,
-                tags = listOf(),
-                creationDate = "Yesterday"
-            )
-        )
-        albumAdapter.submitList(albumList)
+        albumAdapter.submitList(listOf())
         userRecyclerView.adapter = albumAdapter
     }
 

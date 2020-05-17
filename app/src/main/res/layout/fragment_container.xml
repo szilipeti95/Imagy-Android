@@ -6,6 +6,8 @@
     android:orientation="vertical"
     tools:context=".screens.container.ContainerFragment">
 
+    <include layout="@layout/toolbar"/>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"

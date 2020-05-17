@@ -17,6 +17,7 @@ fun NetworkAlbumResult.toDomainModel(): Album {
         author = author,
         likeCount = likeCount,
         tags = tags,
+        thumbnailUri = thumbnailUri,
         creationDate = SimpleDateFormat("yyyy.MM.dd HH:mm").format(Date(creationDate))
     )
 }

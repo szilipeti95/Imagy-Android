@@ -21,11 +21,15 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
         }
 
         guestButton.setOnClickListener {
-            navigator?.add(ContainerFragment())
+            viewModel.loginGuest()
         }
     }
 
     override fun render(viewState: LoginViewState) {
-        
+        when (viewState) {
+            LoginSuccess -> {
+                navigator?.add(ContainerFragment())
+            }
+        }
     }
 }

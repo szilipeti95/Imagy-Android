@@ -5,8 +5,8 @@ import ml.mylittlebackend.jji6wk.data.network.NetworkDataSource
 import javax.inject.Inject
 
 class AuthInteractor @Inject constructor(
-    diskDataSource: DiskDataSource,
-    networkDataSource: NetworkDataSource
+    private val diskDataSource: DiskDataSource,
+    private val networkDataSource: NetworkDataSource
 ) {
     fun login() {
 
@@ -14,5 +14,10 @@ class AuthInteractor @Inject constructor(
 
     fun logout() {
 
+    }
+
+    suspend fun guest(): Boolean {
+        val result = networkDataSource.sendGuest()
+        return result != null
     }
 }

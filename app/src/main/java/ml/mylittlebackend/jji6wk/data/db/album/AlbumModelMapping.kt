@@ -14,6 +14,7 @@ fun RoomAlbum.toDomainModel(): Album {
         author = author,
         likeCount = likeCount,
         tags = tags.split(" "),
+        thumbnailUri = null,
         creationDate = SimpleDateFormat("yyyy.MM.dd HH:mm").format(Date(creationDate))
     )
 }

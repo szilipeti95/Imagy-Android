@@ -16,7 +16,7 @@ interface AlbumAPI {
     @DELETE("/album/delete/{albumId}")
     suspend fun deleteAlbum(@Path("albumId") albumId: Int): NetworkDefaultResult
 
-    @GET("/album")
+    @GET("/albums")
     suspend fun getAlbums(): List<NetworkAlbumResult>
 
     @GET("/album/self")
