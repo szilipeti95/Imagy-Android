@@ -15,6 +15,7 @@ fun NetworkAlbumResult.toDomainModel(): Album {
         id = id,
         name = name,
         author = author,
+        isLiked = isLiked,
         likeCount = likeCount,
         tags = tags,
         thumbnailUri = thumbnailUri,
@@ -22,7 +23,7 @@ fun NetworkAlbumResult.toDomainModel(): Album {
     )
 }
 
-fun NetworkImageResult.toDomainModel(albumId: Int): Image {
+fun NetworkImageResult.toDomainModel(albumId: String): Image {
     return Image(
         imageUri = imageUri,
         albumId = albumId
@@ -33,7 +34,6 @@ fun NetworkUserResult.toDomainModel(): User {
     return User(
         email = email,
         username = username,
-        password = password,
         likedCount = likedCount
     )
 }

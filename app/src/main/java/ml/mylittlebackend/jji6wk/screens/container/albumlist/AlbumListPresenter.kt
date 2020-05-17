@@ -11,4 +11,8 @@ class AlbumListPresenter @Inject constructor(
     suspend fun getAllAlbums(): List<Album> = withIOContext {
         albumInteractor.getAllAlbum() ?: emptyList()
     }
+
+    suspend fun findAlbum(filterText: String): List<Album> = withIOContext {
+        albumInteractor.findAlbums(filterText = filterText) ?: emptyList()
+    }
 }

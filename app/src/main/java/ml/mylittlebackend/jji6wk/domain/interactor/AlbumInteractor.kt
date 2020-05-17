@@ -3,6 +3,7 @@ package ml.mylittlebackend.jji6wk.domain.interactor
 import ml.mylittlebackend.jji6wk.data.db.DiskDataSource
 import ml.mylittlebackend.jji6wk.data.network.NetworkDataSource
 import ml.mylittlebackend.jji6wk.domain.model.Album
+import ml.mylittlebackend.jji6wk.domain.model.Image
 import javax.inject.Inject
 
 class AlbumInteractor @Inject constructor(
@@ -10,34 +11,29 @@ class AlbumInteractor @Inject constructor(
     private val networkDataSource: NetworkDataSource
 ) {
     suspend fun getAllAlbum(): List<Album>? {
-        return networkDataSource.getAlbums()
+        val albums = networkDataSource.getAlbums()
+        albums?.forEach {
+            diskDataSource.saveAlbum(it)
+        }
+        return albums
+    }
+    suspend fun findAlbums(filterText: String): List<Album>? {
+        return diskDataSource.findAlbums(filterText = filterText)
     }
 
-    fun addAlbum(album: Album) {
+    suspend fun getAlbumImages(albumId: String): List<Image>? {
 
+        var images: List<Image>? = diskDataSource.getImagesInAlbum(albumId = albumId)
+        if (images?.count() == 0) {
+            images = networkDataSource.getAlbumImages(albumId = albumId)
+            images?.forEach {
+                diskDataSource.saveImage(image = it, albumId = albumId)
+            }
+        }
+        return images
     }
 
-    fun deleteAlbum(album: Album) {
-
-    }
-
-    fun getImage(fromUri: String) {
-
-    }
-
-    fun addImage() {
-
-    }
-
-    fun getOwnAlbum(): List<Album> {
-        return listOf()
-    }
-
-    fun likeAlbum(albumId: Int) {
-
-    }
-
-    fun dislikeAlbum(albumId: Int) {
-
+    suspend fun getOwnAlbum(): List<Album>? {
+        return networkDataSource.getOwnAlbums()
     }
 }

@@ -1,6 +1,8 @@
 package ml.mylittlebackend.jji6wk.screens.container.albumlist
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.dagger.getViewModelFromFactory
@@ -20,8 +22,23 @@ class AlbumListFragment : RainbowCakeFragment<AlbumListViewState, AlbumListViewM
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        albumAdapter = AlbumAdapter()
+        albumAdapter = AlbumAdapter(registeredUser = true)
         albumAdapter.listener = this
+
+        searchView.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                s?.let {
+                    viewModel.search(text = it.toString())
+                }
+            }
+
+        })
     }
 
     override fun onStart() {
@@ -45,6 +62,10 @@ class AlbumListFragment : RainbowCakeFragment<AlbumListViewState, AlbumListViewM
     }
 
     override fun onAlbumClicked(album: Album) {
-        navigator?.add(AlbumDetailFragment())
+        navigator?.add(AlbumDetailFragment.newInstance(albumId = album.id, albumName = album.name))
+    }
+
+    override fun onHeartClicked(itemView: View, album: Album) {
+
     }
 }

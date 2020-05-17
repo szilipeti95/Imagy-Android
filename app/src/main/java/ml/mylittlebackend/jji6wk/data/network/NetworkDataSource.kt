@@ -1,6 +1,8 @@
 package ml.mylittlebackend.jji6wk.data.network
 
+import android.net.Network
 import android.widget.TimePicker
+import ml.mylittlebackend.jji6wk.data.network.model.NetworkAuthRequest
 import ml.mylittlebackend.jji6wk.data.network.model.NetworkDefaultResult
 import ml.mylittlebackend.jji6wk.data.network.model.toDomainModel
 import ml.mylittlebackend.jji6wk.domain.model.Album
@@ -48,7 +50,7 @@ class NetworkDataSource @Inject constructor(
         }
     }
 
-    suspend fun getAlbumImages(albumId: Int): List<Image>? {
+    suspend fun getAlbumImages(albumId: String): List<Image>? {
         return fetch {
             albumAPI.getImages(albumId = albumId).map { it.toDomainModel(albumId = albumId) }
         }
@@ -63,6 +65,18 @@ class NetworkDataSource @Inject constructor(
     suspend fun sendGuest(): NetworkDefaultResult? {
         return fetch {
             authAPI.getGuest()
+        }
+    }
+
+    suspend fun sendUser(user: NetworkAuthRequest): NetworkDefaultResult? {
+        return fetch {
+            authAPI.postLogin(user)
+        }
+    }
+
+    suspend fun sendLogout(): NetworkDefaultResult? {
+        return fetch {
+            authAPI.postLogout()
         }
     }
 }

@@ -23,7 +23,7 @@ interface AlbumAPI {
     suspend fun getOwnAlbums(): List<NetworkAlbumResult>
 
     @GET("/album/images/{albumId}")
-    suspend fun getImages(@Path("albumId") albumId: Int): List<NetworkImageResult>
+    suspend fun getImages(@Path("albumId") albumId: String): List<NetworkImageResult>
 
     @GET("/image/{imageUri}")
     suspend fun getImage(@Path("imageUri") imageUri: String): Call<ResponseBody>

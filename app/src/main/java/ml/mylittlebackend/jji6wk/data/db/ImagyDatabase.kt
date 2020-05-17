@@ -10,7 +10,7 @@ import ml.mylittlebackend.jji6wk.data.db.converters.CommonConverters
 
 @Database(
     exportSchema = false,
-    version = 1,
+    version = 3,
     entities = [
         RoomAlbum::class,
         RoomImage::class

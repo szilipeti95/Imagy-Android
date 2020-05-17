@@ -8,13 +8,7 @@
     android:layout_margin="12dp"
     tools:context=".screens.container.userdetail.UserDetailFragment">
 
-    <TextView
-        android:id="@+id/albumNameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:text="Backend: Album name"/>
+    <include layout="@layout/toolbar"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/albumDetailRecyclerView"

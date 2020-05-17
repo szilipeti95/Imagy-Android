@@ -26,24 +26,35 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/userDetailUsernameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="From Backend: username"/>
 
             <TextView
+                android:id="@+id/userDetailLikeCountText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="From Backend: Like Count"/>
+
+            <Button
+                android:id="@+id/logoutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_detail_logout"/>
 
         </LinearLayout>
     </LinearLayout>
 
     <TextView
+        android:id="@+id/userDetailYourAblums"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:text="@string/user_your_albums"/>
+        android:paddingStart="16dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/user_detail_guest_albums"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userRecyclerView"

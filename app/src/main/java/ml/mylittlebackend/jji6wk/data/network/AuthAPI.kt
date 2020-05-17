@@ -13,6 +13,9 @@ interface AuthAPI {
     @POST("/register")
     suspend fun postRegister(@Body authRequest: NetworkAuthRequest): NetworkDefaultResult
 
+    @POST("/logout")
+    suspend fun postLogout(): NetworkDefaultResult
+
     @GET("/guest")
     suspend fun getGuest(): NetworkDefaultResult
 }

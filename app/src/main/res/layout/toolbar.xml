@@ -4,4 +4,6 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
+    app:title="Dummy Title"
+    app:titleTextColor="@color/colorPrimaryDark"
     app:navigationIcon="?attr/homeAsUpIndicator" />

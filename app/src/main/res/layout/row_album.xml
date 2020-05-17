@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/relative_layout"
+<RelativeLayout android:id="@+id/relative_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="@drawable/row_background"
-    android:layout_margin="6dp">
+    android:layout_margin="6dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageView
+        android:id="@+id/albumImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/no_image_placeholder"
+        android:scaleType="centerCrop"
+        android:tint="#AA000000"
+        android:background="@drawable/row_background"/>
 
     <TextView
         android:id="@+id/albumNameText"
@@ -13,12 +22,45 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:background="#BB000000"
+        android:padding="6dp"
         android:text="Backend: Album Name"/>
 
-    <ImageView
-        android:id="@+id/albumImageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/no_image_placeholder"/>
+    <TextView
+        android:id="@+id/albumLikeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Backend: LikeCount"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/colorPrimary"
+        android:background="#BB000000"
+        android:padding="3dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginStart="6dp"
+        />
 
+
+    <TextView
+        android:id="@+id/albumAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Backend: Author"
+        android:layout_above="@id/albumLikeCount"
+        android:textColor="@color/colorPrimary"
+        android:background="#BB000000"
+        android:padding="3dp"
+        android:layout_marginStart="6dp"
+        />
+
+
+    <com.like.LikeButton
+        android:id="@+id/heartButton"
+        app:icon_type="heart"
+        app:icon_size="32dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="6dp"
+        android:layout_alignParentEnd="true"
+        />
 </RelativeLayout>

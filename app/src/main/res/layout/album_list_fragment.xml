@@ -8,16 +8,21 @@
     android:layout_margin="12dp"
     tools:context=".screens.container.userdetail.UserDetailFragment">
 
-    <androidx.appcompat.widget.SearchView
+    <EditText
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:hint="@string/search"
+        android:autofillHints=""
+        android:inputType="text" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="26sp"
         android:textStyle="bold"
+        android:paddingStart="16dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="@string/album_list_albums"/>
 
     <androidx.recyclerview.widget.RecyclerView

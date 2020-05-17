@@ -10,7 +10,9 @@ data class RoomAlbum (
     val id: String,
     val name: String,
     val author: String,
+    val isLiked: Int,
     val likeCount: Int,
     val tags: String,
+    val thumbnailUri: String,
     val creationDate: Long
 )
