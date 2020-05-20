@@ -1,5 +1,9 @@
 package ml.mylittlebackend.jji6wk.data.network
 
+import android.net.Network
+import android.widget.TimePicker
+import ml.mylittlebackend.jji6wk.data.network.model.NetworkAuthRequest
+import ml.mylittlebackend.jji6wk.data.network.model.NetworkDefaultResult
 import ml.mylittlebackend.jji6wk.data.network.model.toDomainModel
 import ml.mylittlebackend.jji6wk.domain.model.Album
 import ml.mylittlebackend.jji6wk.domain.model.Image
@@ -20,8 +24,15 @@ class NetworkDataSource @Inject constructor(
     private inline fun <reified T> fetch(action: () -> T?): T? {
         return try {
             action()
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             Timber.d("Network fetch failed")
+            Timber.d(e)
+            return null
+        } catch (e: HttpException) {
+            Timber.d("Network fetch failed")
+            Timber.d(e)
+            return null
+        } catch (e: Exception) {
             Timber.d(e)
             return null
         }
@@ -39,7 +50,7 @@ class NetworkDataSource @Inject constructor(
         }
     }
 
-    suspend fun getAlbumImages(albumId: Int): List<Image>? {
+    suspend fun getAlbumImages(albumId: String): List<Image>? {
         return fetch {
             albumAPI.getImages(albumId = albumId).map { it.toDomainModel(albumId = albumId) }
         }
@@ -48,6 +59,24 @@ class NetworkDataSource @Inject constructor(
     suspend fun getCurrentUser(): User? {
         return fetch {
             userAPI.getAuthenticatedUser().toDomainModel()
+        }
+    }
+
+    suspend fun sendGuest(): NetworkDefaultResult? {
+        return fetch {
+            authAPI.getGuest()
+        }
+    }
+
+    suspend fun sendUser(user: NetworkAuthRequest): NetworkDefaultResult? {
+        return fetch {
+            authAPI.postLogin(user)
+        }
+    }
+
+    suspend fun sendLogout(): NetworkDefaultResult? {
+        return fetch {
+            authAPI.postLogout()
         }
     }
 }

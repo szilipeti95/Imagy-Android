@@ -24,6 +24,6 @@ import java.util.*
 class RoomImage(
     @PrimaryKey
     val id: String,
-    val albumId: Int,
+    val albumId: String,
     val imageUri: String
 )

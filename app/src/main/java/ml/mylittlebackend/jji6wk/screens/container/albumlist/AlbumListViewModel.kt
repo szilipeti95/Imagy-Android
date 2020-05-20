@@ -6,4 +6,11 @@ import javax.inject.Inject
 class AlbumListViewModel @Inject constructor(
     private val albumListPresenter: AlbumListPresenter
 ) : JobViewModel<AlbumListViewState>(Loading) {
+    fun load() = execute {
+        viewState = AlbumListLoaded(albumListPresenter.getAllAlbums())
+    }
+
+    fun search(text: String) = execute {
+        viewState = AlbumListLoaded(albumListPresenter.findAlbum(filterText = text))
+    }
 }

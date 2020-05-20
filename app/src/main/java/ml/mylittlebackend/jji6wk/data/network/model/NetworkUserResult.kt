@@ -6,7 +6,5 @@ import com.squareup.moshi.JsonClass
 class NetworkUserResult(
     val email: String,
     val username: String,
-    val password: String,
-    val likedCount: Int,
-    val profileImageUri: String?
+    val likedCount: Int
 )

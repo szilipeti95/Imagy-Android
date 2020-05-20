@@ -10,23 +10,25 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.grid_image.view.*
 import ml.mylittlebackend.jji6wk.R
+import ml.mylittlebackend.jji6wk.domain.model.Image
 import ml.mylittlebackend.jji6wk.screens.container.AlbumComparator
+import ml.mylittlebackend.jji6wk.utilities.glide.load
 
-class AlbumDetailAdapter : ListAdapter<String, AlbumDetailAdapter.ImageViewHolder>(AlbumDetailComparator) {
+class AlbumDetailAdapter : ListAdapter<Image, AlbumDetailAdapter.ImageViewHolder>(AlbumDetailComparator) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.grid_image, parent, false)
         return ImageViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val imageUri = getItem(position)
-        val uri = imageUri
-        // load image from URI
+        val image = getItem(position)
+        holder.image = image
+        holder.imageView.load(image.imageUri)
     }
 
     inner class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.imageView
-        var uri: String? = null
+        var image: Image? = null
 
     }
 }

@@ -4,4 +4,8 @@ sealed class LoginViewState
 
 object Login : LoginViewState()
 
+object LoginSuccess: LoginViewState()
+
 data class LoginError(val message: String = "") : LoginViewState()
+
+

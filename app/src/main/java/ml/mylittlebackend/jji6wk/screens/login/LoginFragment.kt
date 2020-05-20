@@ -17,15 +17,24 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
         super.onActivityCreated(savedInstanceState)
 
         loginButton.setOnClickListener {
-            navigator?.add(ContainerFragment())
+            val username = usernameEditText.text.toString()
+            val password = passwordEditText.text.toString()
+            viewModel.loginUser(
+                username = username,
+                password = password
+            )
         }
 
         guestButton.setOnClickListener {
-            navigator?.add(ContainerFragment())
+            viewModel.loginGuest()
         }
     }
 
     override fun render(viewState: LoginViewState) {
-        
+        when (viewState) {
+            LoginSuccess -> {
+                navigator?.replace(ContainerFragment())
+            }
+        }
     }
 }

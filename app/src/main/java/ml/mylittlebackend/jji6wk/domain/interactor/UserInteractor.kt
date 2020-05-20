@@ -6,13 +6,13 @@ import ml.mylittlebackend.jji6wk.domain.model.User
 import javax.inject.Inject
 
 class UserInteractor @Inject constructor(
-    diskDataSource: DiskDataSource,
-    networkDataSource: NetworkDataSource
+    private val diskDataSource: DiskDataSource,
+    private val networkDataSource: NetworkDataSource
 ) {
-    fun getUser(): User {
-        return User(email = "Dummy Email",
-                    username = "Dummy Username",
-                    password = "Dummy Password",
+    suspend fun getUser(): User {
+        val result = networkDataSource.getCurrentUser()
+        return result ?: User(email = "Invalid Email",
+                    username = "Invalid Username",
                     likedCount = 0)
     }
 }

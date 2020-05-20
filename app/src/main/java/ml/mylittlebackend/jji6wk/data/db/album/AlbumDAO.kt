@@ -10,8 +10,11 @@ interface AlbumDAO {
     @Query("SELECT * FROM album")
     fun getAllAlbum(): List<RoomAlbum>
 
+    @Query("SELECT * FROM album WHERE name LIKE :filterText")
+    fun findAlbums(filterText: String): List<RoomAlbum>
+
     @Query("SELECT * FROM image WHERE albumId = :albumId")
-    fun getImagesInAlbum(albumId: Int): List<RoomImage>
+    fun getImagesInAlbum(albumId: String): List<RoomImage>
 
     @Insert(onConflict = REPLACE)
     fun addAlbum(roomAlbum: RoomAlbum)

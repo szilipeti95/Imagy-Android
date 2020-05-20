@@ -12,11 +12,11 @@ import javax.inject.Singleton
 class DiskDataSource @Inject constructor(
     private val albumDAO: AlbumDAO
 ) {
-    fun getAllAlbum(): List<Album> {
-        return albumDAO.getAllAlbum().map { it.toDomainModel() }
+    fun findAlbums(filterText: String): List<Album> {
+        return albumDAO.findAlbums("%$filterText%").map { it.toDomainModel() }
     }
 
-    fun getImagesInAlbum(albumId: Int): List<Image> {
+    fun getImagesInAlbum(albumId: String): List<Image> {
         return albumDAO.getImagesInAlbum(albumId = albumId).map { it.toDomainModel() }
     }
 
@@ -24,7 +24,7 @@ class DiskDataSource @Inject constructor(
         albumDAO.addAlbum(album.toRoomModel())
     }
 
-    fun saveImage(image: Image) {
-        albumDAO.addImage(image.toRoomModel())
+    fun saveImage(image: Image, albumId: String) {
+        albumDAO.addImage(image.toRoomModel(albumId = albumId))
     }
 }
